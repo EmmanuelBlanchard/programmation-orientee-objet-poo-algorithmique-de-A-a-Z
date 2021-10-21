@@ -40,8 +40,8 @@ class Personnage{
     public function __toString() {
         $texte = "Mon nom est : " .$this->nom . " <br />";
         $texte .= "Ma classe est : " .$this->classe . " <br />";
-        $texte .= "J'inflige : ".$this->calculDegat() . " dégats <br />";
-        $texte .= "J'ai : " .$this->pointsDeVie . " points de vie <br />";
+        $texte .= "J'inflige : ". $this->attaque . " dégats <br />";
+        $texte .= "J'ai : " . $this->pointsDeVie . " points de vie <br />";
         $texte .= ($this->forceDuBien) ? "Je fais partie des forces du bien <br />" : "Je fais partie des forces du mal <br />";
         return $texte;
     }
