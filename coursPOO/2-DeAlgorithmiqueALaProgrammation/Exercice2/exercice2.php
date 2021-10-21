@@ -22,7 +22,7 @@ class Livre{
     public function setCouleurCouverture($couleurCouverture){$this->couleurCouverture = $couleurCouverture;}
 
     public function getEstTraduitEnAnglais(){return $this->estTraduitEnAnglais;}   
-    public function setEstTraduitEnAnglais($estTraduitEnAnglais){$this->estTraduitEnAnglais = $pointsDeVie;}
+    public function setEstTraduitEnAnglais($estTraduitEnAnglais){$this->estTraduitEnAnglais = $estTraduitEnAnglais;}
 
     private function traductionAnglaise(){
         return $this->estTraduitEnAnglais = true;
