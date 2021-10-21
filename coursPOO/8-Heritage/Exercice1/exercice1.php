@@ -79,12 +79,15 @@ class Humain extends Personnage{
 
 class Zombie extends Personnage{
     private $vitesse;
-
     private const DEGATZOMBIE = 10;
+
+    public static $tableauZombies;
 
     public function __construct($nom,$classe,$pointsDeVie,$forceDuBien,$vitesse){
         parent::__construct($nom,$classe,self::DEGATZOMBIE,$pointsDeVie,$forceDuBien);
         $this->vitesse = $vitesse;
+
+        self::$tableauZombies[] = $this;
     }
 
     public function setVitesse($vitesse){
@@ -105,6 +108,13 @@ class Zombie extends Personnage{
         $texte .= "Ma vitesse : " .$this->vitesse . " <br />";
         return $texte;
     }
+
+    public static function afficherZombies(){
+        echo "Voici les  zombies ! <br />";
+        for($i = 0; $i < count(self::$tableauZombies); $i++){
+            echo self::$tableauZombies[$i] ." <br/>";
+        }
+    }
 }
 
 $perso1 = new Humain("Milo","guerrier",10,100,true,2);
@@ -113,7 +123,13 @@ $perso3 = new Humain("Lili","archère",5,55,false,2);
 $perso4 = new Humain("Gael","voleur",2,10,false,1);
 
 $zombie1 = new Zombie("z1","zombie",100,false,4);
-echo $zombie1;
-$zombie1->afficherDegat();
+// echo $zombie1;
+// $zombie1->afficherDegat();
+$zombie2 = new Zombie("z2","zombie",100,false,10);
+$zombie3 = new Zombie("z3","zombie",100,false,10);
+$zombie4 = new Zombie("z4","zombie",100,false,10);
+$zombie5 = new Zombie("z5","zombie",100,false,10);
+
+Zombie::afficherZombies();
 
 ?>
