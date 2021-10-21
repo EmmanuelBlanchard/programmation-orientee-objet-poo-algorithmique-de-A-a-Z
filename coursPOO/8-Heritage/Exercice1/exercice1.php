@@ -81,13 +81,9 @@ class Zombie extends Personnage{
     private $vitesse;
     private const DEGATZOMBIE = 10;
 
-    public static $tableauZombies;
-
     public function __construct($nom,$classe,$pointsDeVie,$forceDuBien,$vitesse){
         parent::__construct($nom,$classe,self::DEGATZOMBIE,$pointsDeVie,$forceDuBien);
         $this->vitesse = $vitesse;
-
-        self::$tableauZombies[] = $this;
     }
 
     public function setVitesse($vitesse){
@@ -108,12 +104,39 @@ class Zombie extends Personnage{
         $texte .= "Ma vitesse : " .$this->vitesse . " <br />";
         return $texte;
     }
+}
 
-    public static function afficherZombies(){
-        echo "Voici les  zombies ! <br />";
-        for($i = 0; $i < count(self::$tableauZombies); $i++){
-            echo self::$tableauZombies[$i] ." <br/>";
+class Jeu{
+    private $nom;
+    private $tableauZombies;
+    private $tableauHumains;
+
+    public function __construct($nom){
+        $this->nom = $nom;
+    }
+
+    public function ajouterZombie($zombie){
+        $this->tableauZombies[] = $zombie;
+    }
+
+    public function ajouterHumains($humain){
+        $this->tableauHumains[] = $humain;
+    }
+
+    public function __toString(){
+        $texte = "Nom du jeu : " . $this->nom . " <br />";
+        $texte .= "************************* : <br />";
+        $texte .= "Voici la liste des zombies : <br />";
+        for($i = 0; $i < count($this->tableauZombies); $i++){
+            $texte .= "************************* : <br />";
+            $texte .= $this->tableauZombies[$i] ." <br/>";
         }
+        $texte .= "Voici la liste des humains : <br />";
+        for($i = 0; $i < count($this->tableauHumains); $i++){
+            $texte .= "************************* : <br />";
+            $texte .= $this->tableauHumains[$i] ." <br/>";
+        }
+        return $texte;
     }
 }
 
@@ -123,13 +146,26 @@ $perso3 = new Humain("Lili","archère",5,55,false,2);
 $perso4 = new Humain("Gael","voleur",2,10,false,1);
 
 $zombie1 = new Zombie("z1","zombie",100,false,4);
-// echo $zombie1;
-// $zombie1->afficherDegat();
 $zombie2 = new Zombie("z2","zombie",100,false,10);
 $zombie3 = new Zombie("z3","zombie",100,false,10);
 $zombie4 = new Zombie("z4","zombie",100,false,10);
 $zombie5 = new Zombie("z5","zombie",100,false,10);
 
-Zombie::afficherZombies();
+// Zombie::afficherZombies();
+
+$monJeu = new Jeu("Jeu MGA");
+
+$monJeu->ajouterZombie($zombie1);
+$monJeu->ajouterZombie($zombie2);
+$monJeu->ajouterZombie($zombie3);
+$monJeu->ajouterZombie($zombie4);
+$monJeu->ajouterZombie($zombie5);
+
+$monJeu->ajouterHumains($perso1);
+$monJeu->ajouterHumains($perso2);
+$monJeu->ajouterHumains($perso3);
+$monJeu->ajouterHumains($perso4);
+
+echo $monJeu;
 
 ?>
