@@ -38,10 +38,10 @@ class Personnage{
     }
 
     public function __toString() {
-        $texte = "Mon nom est : " .$this->nom . " <br />";
-        $texte .= "Ma classe est : " .$this->classe . " <br />";
-        $texte .= "J'inflige : ".$this->calculDegat() . " dégats <br />";
-        $texte .= "J'ai : " .$this->pointsDeVie . " points de vie <br />";
+        $texte = "Mon nom est : " . $this->nom . " <br />";
+        $texte .= "Ma classe est : " . $this->classe . " <br />";
+        $texte .= "J'inflige : " . $this->attaque . " dégats <br />";
+        $texte .= "J'ai : " . $this->pointsDeVie . " points de vie <br />";
         $texte .= ($this->forceDuBien) ? "Je fais partie des forces du bien <br />" : "Je fais partie des forces du mal <br />";
         return $texte;
     }
@@ -76,18 +76,44 @@ class Humain extends Personnage{
     }
 }
 
+
+class Zombie extends Personnage{
+    private $vitesse;
+
+    private const DEGATZOMBIE = 10;
+
+    public function __construct($nom,$classe,$pointsDeVie,$forceDuBien,$vitesse){
+        parent::__construct($nom,$classe,self::DEGATZOMBIE,$pointsDeVie,$forceDuBien);
+        $this->vitesse = $vitesse;
+    }
+
+    public function setVitesse($vitesse){
+        $this->vitesse = $vitesse;
+    }
+
+    private function calculDegat(){
+        return $this->attaque;
+    }
+
+    public function afficherDegat(){
+        echo "Dégats infligés : " . $this->calculDegat() . " dégats <br />";
+    }
+
+    public function __toString(){
+        $texte = "zombie en approche ! <br />";
+        $texte .= parent::__toString();
+        $texte .= "Ma vitesse : " .$this->vitesse . " <br />";
+        return $texte;
+    }
+}
+
 $perso1 = new Humain("Milo","guerrier",10,100,true,2);
 $perso2 = new Humain("Tya","archère",5,50,true,3);
 $perso3 = new Humain("Lili","archère",5,55,false,2);
 $perso4 = new Humain("Gael","voleur",2,10,false,1);
-echo $perso1;
-echo "***************************** <br />";
-echo $perso2;
-echo "***************************** <br />";
-echo $perso3;
-echo "***************************** <br />";
-echo $perso4;
 
-$perso1->modificationStatistique(10,30);
+$zombie1 = new Zombie("z1","zombie",100,false,4);
+echo $zombie1;
+$zombie1->afficherDegat();
 
 ?>
